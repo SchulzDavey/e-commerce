@@ -1,18 +1,14 @@
+import { ProductType } from '@/types/ProductType';
+import formatPrice from '@/util/PriceFormat';
 import Image from 'next/image';
 import { FC } from 'react';
 
-interface ProductProps {
-  name: string;
-  image: string;
-  price: string;
-}
-
-const Product: FC<ProductProps> = ({ name, image, price }) => {
+const Product = ({ name, image, price }: ProductType) => {
   return (
     <div>
       <Image src={image} alt={name} width={400} height={400} />
       <h1>{name}</h1>
-      <p>{price}</p>
+      <p>{formatPrice(price!)}</p>
     </div>
   );
 };
