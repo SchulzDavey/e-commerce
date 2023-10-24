@@ -1,6 +1,7 @@
 import { ProductType } from '@/types/ProductType';
 import formatPrice from '@/util/PriceFormat';
 import Image from 'next/image';
+import AddCart from './AddCart';
 
 export interface ProductDetailsPageProps {
   id: string;
@@ -35,9 +36,7 @@ const ProductDetailsPage = async ({
             {formatPrice(searchParams.unit_amount!)}
           </p>
         </div>
-        <button className="my-12 text-white py-2 px-6 font-medium rounded-md bg-teal-700">
-          Add to cart
-        </button>
+        <AddCart {...searchParams} />
       </div>
     </div>
   );
