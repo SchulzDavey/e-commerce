@@ -6,7 +6,7 @@ import Image from 'next/image';
 import { IoAddCircle, IoRemoveCircle } from 'react-icons/io5';
 import cart from '@/public/images/cart.png';
 import { AnimatePresence, motion } from 'framer-motion';
-import Checkout from './Checkout';
+import Checkout from './CheckoutPage';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 
@@ -62,12 +62,22 @@ const Cart = () => {
         onClick={(e) => e.stopPropagation()}
         className="bg-white absolute right-0 top-0 h-screen p-12 overflow-y-scroll text-gray-700 w-full lg:w-2/5"
       >
-        <button
-          onClick={() => cartStore.toggleCart()}
-          className="text-sm font-bold pb-12"
-        >
-          Back to store
-        </button>
+        {cartStore.onCheckout === 'cart' && (
+          <button
+            onClick={() => cartStore.toggleCart()}
+            className="text-sm font-bold pb-12"
+          >
+            Back to store
+          </button>
+        )}
+        {cartStore.onCheckout === 'checkout' && (
+          <button
+            onClick={() => cartStore.setCheckout('cart')}
+            className="text-sm font-bold pb-12"
+          >
+            Check your cart
+          </button>
+        )}
         {cartStore.onCheckout === 'cart' && (
           <>
             {cartStore.cart.map((item) => (
@@ -117,8 +127,8 @@ const Cart = () => {
             ))}
           </>
         )}
-        {cartStore.cart.length > 0 && (
-          <motion.div>
+        {cartStore.cart.length > 0 && cartStore.onCheckout === 'cart' ? (
+          <motion.div layout>
             <p>Total: {formatPrice(totalPrice)}</p>
             <button
               onClick={() => {
@@ -130,7 +140,7 @@ const Cart = () => {
               Checkout
             </button>
           </motion.div>
-        )}
+        ) : null}
         {cartStore.onCheckout === 'checkout' && <Checkout />}
         <AnimatePresence>
           {!cartStore.cart.length && (
