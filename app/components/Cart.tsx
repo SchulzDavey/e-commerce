@@ -9,13 +9,10 @@ import { AnimatePresence, motion } from 'framer-motion';
 import Checkout from './Checkout';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
-import { loadStripe, StripeElementsOptions } from '@stripe/stripe-js';
-import { useState } from 'react';
 
 const Cart = () => {
   const router = useRouter();
   const cartStore = useCartStore();
-  const [clientSecret, setClientSecret] = useState('');
 
   const totalPrice = cartStore.cart.reduce(
     (acc, item) => acc + item.unit_amount! * item.quantity!,
@@ -44,9 +41,8 @@ const Cart = () => {
             ? stripeData.paymentIntent
             : stripeData.currentIntent;
 
-          setClientSecret(sessionData.client_secret);
+          cartStore.setClientSecret(sessionData.client_secret);
           cartStore.setPaymentIntent(sessionData.id);
-          console.log(sessionData);
         });
     } catch (error) {
       console.log(error);

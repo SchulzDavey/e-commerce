@@ -20,6 +20,8 @@ interface CartState {
   setPaymentIntent: (val: string) => void;
   onCheckout: string;
   setCheckout: (val: string) => void;
+  clientSecret: string;
+  setClientSecret: (val: string) => void;
 }
 
 export const useCartStore = create<CartState>()(
@@ -28,6 +30,7 @@ export const useCartStore = create<CartState>()(
       cart: [],
       isOpen: false,
       paymentIntent: '',
+      clientSecret: '',
       onCheckout: 'cart',
       toggleCart: () => set((state) => ({ isOpen: !state.isOpen })),
       addProduct: (item) =>
@@ -74,6 +77,7 @@ export const useCartStore = create<CartState>()(
         }),
       setPaymentIntent: (val) => set((state) => ({ paymentIntent: val })),
       setCheckout: (val) => set((state) => ({ onCheckout: val })),
+      setClientSecret: (val) => set((state) => ({ clientSecret: val })),
     }),
     { name: 'cart-store' }
   )
