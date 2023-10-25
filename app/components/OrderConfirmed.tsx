@@ -9,12 +9,12 @@ import Link from 'next/link';
 const OrderConfirmedPage = () => {
   const cartStore = useCartStore();
 
-  const orderButton = () => {
+  const checkoutOrder = () => {
     setTimeout(() => {
       cartStore.setCheckout('cart');
-      cartStore.toggleCart();
-    });
+    }, 1000);
 
+    cartStore.toggleCart();
     cartStore.setPaymentIntent('');
     cartStore.setClientSecret('');
     cartStore.clearCart();
@@ -33,7 +33,7 @@ const OrderConfirmedPage = () => {
       </div>
       <div className="flex items-center justify-center gap-8">
         <Link href={`/dashboard`}>
-          <button onClick={orderButton} className="font-medium">
+          <button onClick={checkoutOrder} className="font-medium">
             Check your Order
           </button>
         </Link>
