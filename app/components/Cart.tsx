@@ -9,6 +9,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import Checkout from './CheckoutPage';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
+import OrderConfirmed from './OrderConfirmed';
 
 const Cart = () => {
   const router = useRouter();
@@ -142,8 +143,9 @@ const Cart = () => {
           </motion.div>
         ) : null}
         {cartStore.onCheckout === 'checkout' && <Checkout />}
+        {cartStore.onCheckout === 'success' && <OrderConfirmed />}
         <AnimatePresence>
-          {!cartStore.cart.length && (
+          {!cartStore.cart.length && cartStore.onCheckout === 'cart' && (
             <motion.div
               animate={{ scale: 1, rotateZ: 0, opacity: 0.75 }}
               initial={{ scale: 0, rotateZ: -10, opacity: 0 }}
