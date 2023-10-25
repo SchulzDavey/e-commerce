@@ -1,4 +1,3 @@
-import { ProductType } from '@/types/ProductType';
 import formatPrice from '@/util/PriceFormat';
 import Image from 'next/image';
 import AddCart from './AddCart';
@@ -19,12 +18,12 @@ const ProductDetailsPage = async ({
   searchParams: ProductDetailsPageProps;
 }) => {
   return (
-    <div className="flex justify-between gap-24 p-12 text-gray-700">
+    <div className="flex flex-col 2xl:flex-row items-center justify-between gap-24 text-gray-700">
       <Image
         src={searchParams.image}
         alt={searchParams.name}
-        width={800}
-        height={800}
+        width={600}
+        height={600}
         className="w-full h-96 object-cover rounded-lg"
       />
       <div className="font-medium text-gray-700">

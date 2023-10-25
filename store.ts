@@ -1,4 +1,3 @@
-import { stat } from 'fs';
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
@@ -6,6 +5,7 @@ export type CartItem = {
   name: string;
   id: string;
   image: string;
+  description?: string;
   quantity?: number | 1;
   unit_amount: number | null;
 };
@@ -16,6 +16,10 @@ interface CartState {
   toggleCart: () => void;
   addProduct: (item: CartItem) => void;
   removeProduct: (item: CartItem) => void;
+  paymentIntent: string;
+  setPaymentIntent: (val: string) => void;
+  onCheckout: string;
+  setCheckout: (val: string) => void;
 }
 
 export const useCartStore = create<CartState>()(
@@ -23,6 +27,8 @@ export const useCartStore = create<CartState>()(
     (set) => ({
       cart: [],
       isOpen: false,
+      paymentIntent: '',
+      onCheckout: 'cart',
       toggleCart: () => set((state) => ({ isOpen: !state.isOpen })),
       addProduct: (item) =>
         set((state) => {
@@ -66,6 +72,8 @@ export const useCartStore = create<CartState>()(
             return { cart: filteredCart };
           }
         }),
+      setPaymentIntent: (val) => set((state) => ({ paymentIntent: val })),
+      setCheckout: (val) => set((state) => ({ onCheckout: val })),
     }),
     { name: 'cart-store' }
   )

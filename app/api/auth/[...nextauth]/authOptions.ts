@@ -21,8 +21,8 @@ const authOptions: NextAuthOptions = {
 
       if (user.name && user.email) {
         const customer = await stripe.customers.create({
-          email: user.email,
-          name: user.name,
+          email: user.email || undefined,
+          name: user.name || undefined,
         });
 
         await prisma.user.update({
@@ -32,6 +32,12 @@ const authOptions: NextAuthOptions = {
           },
         });
       }
+    },
+  },
+  callbacks: {
+    async session({ session, token, user }) {
+      session.user = user;
+      return session;
     },
   },
 };
