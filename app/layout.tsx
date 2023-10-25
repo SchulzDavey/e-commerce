@@ -3,6 +3,9 @@ import authOptions from './api/auth/[...nextauth]/authOptions';
 import NavBar from './components/NavBar';
 import './globals.css';
 import Hydrate from './components/Hydrate';
+import { Roboto, Lobster_Two } from 'next/font/google';
+
+const roboto = Roboto({ weight: ['400', '500', '700'], subsets: ['latin'] });
 
 export const metadata = {
   title: 'Create Next App',
@@ -18,7 +21,7 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
-      <body className="mx-64">
+      <body className={`mx-64 ${roboto.className}`}>
         <Hydrate>
           <NavBar user={session?.user} expires={session?.expires as string} />
           {children}
