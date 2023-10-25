@@ -7,14 +7,51 @@ import { IoAddCircle, IoRemoveCircle } from 'react-icons/io5';
 import cart from '@/public/images/cart.png';
 import { AnimatePresence, motion } from 'framer-motion';
 import Checkout from './Checkout';
+import axios from 'axios';
+import { useRouter } from 'next/navigation';
+import { loadStripe, StripeElementsOptions } from '@stripe/stripe-js';
+import { useState } from 'react';
 
 const Cart = () => {
+  const router = useRouter();
   const cartStore = useCartStore();
+  const [clientSecret, setClientSecret] = useState('');
 
   const totalPrice = cartStore.cart.reduce(
     (acc, item) => acc + item.unit_amount! * item.quantity!,
     0
   );
+
+  const onCheckout = async () => {
+    try {
+      const data = {
+        items: cartStore.cart,
+        payment_intent_id: cartStore.paymentIntent,
+      };
+
+      await axios
+        .post('/api/stripe/create-payment-intent', data)
+        .then((response) => {
+          if (response.status === 403) {
+            router.push('/api/auth/signin');
+          }
+          return response;
+        })
+        .then((data) => {
+          const { data: stripeData } = data;
+
+          const sessionData = stripeData.paymentIntent
+            ? stripeData.paymentIntent
+            : stripeData.currentIntent;
+
+          setClientSecret(sessionData.client_secret);
+          cartStore.setPaymentIntent(sessionData.id);
+          console.log(sessionData);
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <motion.div
@@ -84,12 +121,14 @@ const Cart = () => {
             ))}
           </>
         )}
-
         {cartStore.cart.length > 0 && (
           <motion.div>
             <p>Total: {formatPrice(totalPrice)}</p>
             <button
-              onClick={() => cartStore.setCheckout('checkout')}
+              onClick={() => {
+                cartStore.setCheckout('checkout');
+                onCheckout();
+              }}
               className="py-2 mt-4 bg-teal-700 w-full rounded-md text-white"
             >
               Checkout

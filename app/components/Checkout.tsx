@@ -11,29 +11,7 @@ const stripePromise = loadStripe(
 );
 
 const Checkout = () => {
-  const router = useRouter();
-  const cartStore = useCartStore();
-  const [clientSecret, setClientSecret] = useState('');
-
-  useEffect(() => {
-    fetch('/api/stripe/create-payment-intent', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        items: cartStore.cart,
-        payment_intent_id: cartStore.paymentIntent,
-      }),
-    })
-      .then((res) => {
-        if (res.status === 403) {
-          return router.push('/api/auth/signin');
-        }
-        return res.json();
-      })
-      .then((data) => {
-        console.log(data);
-      });
-  }, []);
+  // const cartStore = useCartStore();
 
   return <div>Checkout</div>;
 };
