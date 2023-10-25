@@ -6,7 +6,7 @@ import Image from 'next/image';
 import { IoAddCircle, IoRemoveCircle } from 'react-icons/io5';
 import cart from '@/public/images/cart.png';
 import { AnimatePresence, motion } from 'framer-motion';
-import Checkout from './CheckoutPage';
+import Checkout from './Checkout/CheckoutPage';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import OrderConfirmed from './OrderConfirmed';
