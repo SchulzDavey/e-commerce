@@ -9,7 +9,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import Checkout from './Checkout/CheckoutPage';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
-import OrderConfirmed from './OrderConfirmed';
+import OrderConfirmed from './Checkout/OrderConfirmed';
 
 const Cart = () => {
   const router = useRouter();
