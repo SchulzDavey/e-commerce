@@ -25,6 +25,11 @@ interface CartState {
   setClientSecret: (val: string) => void;
 }
 
+interface ThemeState {
+  mode: 'light' | 'dark';
+  toggleMode: (theme: 'light' | 'dark') => void;
+}
+
 export const useCartStore = create<CartState>()(
   persist(
     (set) => ({
@@ -82,5 +87,15 @@ export const useCartStore = create<CartState>()(
       clearCart: () => set((state) => ({ cart: [] })),
     }),
     { name: 'cart-store' }
+  )
+);
+
+export const useThemeStore = create<ThemeState>()(
+  persist(
+    (set) => ({
+      mode: 'light',
+      toggleMode: (theme) => set(() => ({ mode: theme })),
+    }),
+    { name: 'theme-store' }
   )
 );

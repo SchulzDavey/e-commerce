@@ -1,13 +1,14 @@
 'use client';
 
 import { useCartStore } from '@/store';
+import { AnimatePresence, motion } from 'framer-motion';
 import { Session } from 'next-auth';
 import { signIn, signOut } from 'next-auth/react';
 import Image from 'next/image';
 import Link from 'next/link';
-import Cart from './Cart';
 import { AiFillShopping } from 'react-icons/ai';
-import { AnimatePresence, motion } from 'framer-motion';
+import Cart from './Cart';
+import DarkLight from './DarkLight';
 
 const NavBar = ({ user }: Session) => {
   const cartStore = useCartStore();
@@ -17,7 +18,7 @@ const NavBar = ({ user }: Session) => {
       <Link href="/">
         <h1>Styled</h1>
       </Link>
-      <ul className="flex items-center gap-12">
+      <ul className="flex items-center gap-8">
         <li
           onClick={() => cartStore.toggleCart()}
           className="flex items-center relative text-3xl cursor-pointer"
@@ -36,6 +37,9 @@ const NavBar = ({ user }: Session) => {
             )}
           </AnimatePresence>
         </li>
+
+        <DarkLight />
+
         {!user && (
           <li className="bg-primary text-white py-2 px-4 rounded-md">
             <button onClick={() => signIn()}>Sign in</button>
