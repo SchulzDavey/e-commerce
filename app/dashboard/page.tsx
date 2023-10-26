@@ -30,9 +30,11 @@ const Dashboard = () => {
       <div className="font-medium">
         <h1>{orders.length === 0 ? 'No orders placed' : 'Your orders:'}</h1>
         {orders.map((order: any) => (
-          <div key={order.id} className="rounded-lg p-8 my-12">
-            <h2>Order reference: {order.id}</h2>
-            <p>Time: {order.createdDate}</p>
+          <div key={order.id} className="rounded-lg my-12">
+            <h2 className="text-sm font-medium">Order reference: {order.id}</h2>
+            <p className="text-sm">
+              Time: {new Date(order.createdDate).toString()}
+            </p>
             <p className="text-md py-2">
               Status:{' '}
               <span
@@ -44,9 +46,9 @@ const Dashboard = () => {
               </span>
             </p>
             <p className="font-medium">Total: {formatPrice(order.amount)}</p>
-            <div className="flex gap-8">
+            <div className="text-sm lg:flex items-center gap-4">
               {order.products.map((product: any) => (
-                <div key={product.id} className="py-2">
+                <div key={product.id} className="py-2 ">
                   <h2 className="py-2">{product.name}</h2>
                   <div className="flex items-center gap-4">
                     <Image
