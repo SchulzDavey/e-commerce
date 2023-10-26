@@ -30,7 +30,10 @@ const Dashboard = () => {
       <div className="font-medium">
         <h1>{orders.length === 0 ? 'No orders placed' : 'Your orders:'}</h1>
         {orders.map((order: any) => (
-          <div key={order.id} className="rounded-lg my-12">
+          <div
+            key={order.id}
+            className="rounded-lg p-8 my-4 space-y-2 bg-base-200"
+          >
             <h2 className="text-sm font-medium">Order reference: {order.id}</h2>
             <p className="text-sm">
               Time: {new Date(order.createdDate).toString()}

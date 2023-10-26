@@ -1,25 +1,35 @@
 'use client';
 
 import { CartItem, useCartStore } from '@/store';
+import { useState } from 'react';
 
 const AddCart = ({ name, id, image, unit_amount, quantity }: CartItem) => {
   const cartStore = useCartStore();
+  const [added, setAdded] = useState(false);
+
+  const AddToCart = () => {
+    cartStore.addProduct({
+      name,
+      id,
+      image,
+      unit_amount,
+      quantity,
+    });
+    setAdded(true);
+
+    setTimeout(() => {
+      setAdded(false);
+    }, 1000);
+  };
 
   return (
     <>
       <button
-        onClick={() =>
-          cartStore.addProduct({
-            name,
-            id,
-            image,
-            unit_amount,
-            quantity,
-          })
-        }
-        className="my-12 text-white py-2 px-6 font-medium rounded-md bg-teal-700"
+        onClick={AddToCart}
+        disabled={added}
+        className="my-4 btn btn-primary w-full"
       >
-        Add to cart
+        {added ? 'Adding to cart' : 'Add to cart'}
       </button>
     </>
   );

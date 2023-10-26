@@ -13,6 +13,7 @@ export async function GET(req: NextRequest, res: NextResponse) {
 
     const orders = await prisma.order.findMany({
       where: {
+        // @ts-ignore
         userId: user?.user?.id,
       },
       include: {
