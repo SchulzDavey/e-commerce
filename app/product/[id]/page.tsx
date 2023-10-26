@@ -28,9 +28,9 @@ const ProductDetailsPage = async ({
       />
       <div className="font-medium">
         <h1 className="text-2xl  py-2">{searchParams.name}</h1>
-        <p className="py-2">{searchParams.description}</p>
-        <p className="py-2">{searchParams.features}</p>
-        <div className="flex gap-2">
+        <p className="py-1">{searchParams.description}</p>
+        <p className="py-1">{searchParams.features}</p>
+        <div className="flex gap-1 mb-3">
           <p className="font-bold text-primary">
             {formatPrice(searchParams.unit_amount!)}
           </p>

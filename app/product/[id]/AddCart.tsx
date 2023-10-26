@@ -24,11 +24,7 @@ const AddCart = ({ name, id, image, unit_amount, quantity }: CartItem) => {
 
   return (
     <>
-      <button
-        onClick={AddToCart}
-        disabled={added}
-        className="my-4 btn btn-primary w-full"
-      >
+      <button onClick={AddToCart} disabled={added} className="btn btn-primary">
         {added ? 'Adding to cart' : 'Add to cart'}
       </button>
     </>

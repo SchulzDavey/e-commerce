@@ -22,10 +22,12 @@ export default async function RootLayout({
 
   return (
     <html lang="en" className={`${roboto.className}`}>
-      <Hydrate>
-        <NavBar user={session?.user} expires={session?.expires as string} />
-        {children}
-      </Hydrate>
+      <body>
+        <Hydrate>
+          <NavBar user={session?.user} expires={session?.expires as string} />
+          {children}
+        </Hydrate>
+      </body>
     </html>
   );
 }

@@ -1,8 +1,8 @@
 'use client';
 
-import { useCartStore } from '@/store';
+import { useCartStore, useThemeStore } from '@/store';
 import { Elements } from '@stripe/react-stripe-js';
-import { loadStripe, StripeElementsOptions } from '@stripe/stripe-js';
+import { StripeElementsOptions, loadStripe } from '@stripe/stripe-js';
 import { motion } from 'framer-motion';
 import CheckoutForm from './CheckoutForm';
 import OrderAnimation from './OrderAnimation';
@@ -12,12 +12,13 @@ const stripePromise = loadStripe(
 );
 
 const CheckoutPage = () => {
+  const theme = useThemeStore();
   const cartStore = useCartStore();
 
   const options: StripeElementsOptions = {
     clientSecret: cartStore.clientSecret,
     appearance: {
-      theme: 'stripe',
+      theme: theme.mode === 'light' ? 'flat' : 'night',
       labels: 'floating',
     },
   };

@@ -13,9 +13,9 @@ const Hydrate = ({ children }: PropsWithChildren) => {
 
   if (isHydrated)
     return (
-      <body data-theme={theme.mode}>
-        <div className="mx-4 lg:mx-48 min-h-screen">{children}</div>
-      </body>
+      <div className="min-h-screen" data-theme={theme.mode}>
+        <div className="mx-4 lg:mx-48 ">{children}</div>
+      </div>
     );
 };
 

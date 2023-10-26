@@ -5,7 +5,7 @@ export type CartItem = {
   name: string;
   id: string;
   image: string;
-  description?: string;
+  description?: string | null;
   quantity?: number | 1;
   unit_amount: number | null;
 };
