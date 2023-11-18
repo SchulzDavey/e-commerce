@@ -12,7 +12,7 @@ Een e-commerce webapplicatie gebouwd met Next.js en geïntegreerd met Stripe voo
 
 4. Voeg een database toe aan de omgevingsvariabelen, bijvoorbeeld MongoDB of PostgreSQL, afhankelijk van de gekozen database. Zorg ervoor dat je de juiste verbindings-URI of -gegevens configureert.
 
-5. Voeg ook Google Cloud API-sleutels toe aan de omgevingsvariabelen als je functionaliteiten zoals Google Maps of andere Google-services gebruikt in de applicatie.
+5. Voeg ook Google Cloud API-sleutels toe aan de omgevingsvariabelen.
 
 6. Installeer de packages:
    "npm install" of "yarn install"
